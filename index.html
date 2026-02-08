@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vesta 💖</title>
+
+<style>
+body {
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle,#ff9ad5,#ff4b91);
+font-family: 'Segoe UI', sans-serif;
+overflow:hidden;
+color:white;
+}
+
+.card {
+text-align:center;
+background: rgba(255,255,255,0.15);
+padding:40px;
+border-radius:25px;
+backdrop-filter: blur(10px);
+box-shadow:0 0 40px rgba(255,0,120,.5);
+}
+
+button {
+padding:15px 40px;
+margin:15px;
+border:none;
+border-radius:30px;
+font-size:20px;
+cursor:pointer;
+}
+
+#yes {
+background:#ff0066;
+color:white;
+}
+
+#no {
+background:white;
+}
+
+.heart {
+position:fixed;
+font-size:20px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float {
+0% {transform:translateY(0); opacity:1;}
+100% {transform:translateY(-100vh); opacity:0;}
+}
+
+.sparkle {
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:spark 1s linear forwards;
+}
+
+@keyframes spark {
+0%{transform:scale(1);opacity:1;}
+100%{transform:scale(0);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f3a9d2a9a.mp3">
+</audio>
+
+<div class="card" id="card">
+<h1>Vesta 💖</h1>
+<h2>Do you love Harsh?</h2>
+
+<button id="yes">Yes 😭❤️</button>
+<button id="no">No 🙃</button>
+</div>
+
+<script>
+
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"%";
+noBtn.style.top=Math.random()*80+"%";
+});
+
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"%";
+h.style.bottom="0";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+
+document.getElementById("yes").onclick=()=>{
+document.getElementById("card").innerHTML=`
+
+<h1>💥 VESTA 💥</h1>
+
+<h2>I love you too ❤️</h2>
+
+<p>
+You are my calm, my storm, my home,<br>
+Across all stars, you’re never alone.<br>
+From Harsh — whose heart only beats your name.
+</p>
+
+<p>
+Ты моё солнце, мой тихий свет,<br>
+С тобой я нашёл свой целый мир.<br>
+Я люблю тебя, Веста — навсегда.
+</p>
+
+<h3>— Harsh 🖤</h3>
+
+`;
+
+for(let i=0;i<200;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),1000);
+}
+
+}
+
+</script>
+
+</body>
+</html>
