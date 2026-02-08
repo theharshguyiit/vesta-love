@@ -73,9 +73,10 @@ animation:spark 1s linear forwards;
 
 <body>
 
-<audio autoplay loop>
+<audio id="music" loop>
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f3a9d2a9a.mp3">
 </audio>
+
 
 <div class="card" id="card">
 <h1>Vesta 💖</h1>
@@ -105,7 +106,9 @@ setTimeout(()=>h.remove(),5000);
 },300);
 
 document.getElementById("yes").onclick=()=>{
+document.getElementById("music").play();
 document.getElementById("card").innerHTML=`
+
 
 <h1>💥 VESTA 💥</h1>
 
