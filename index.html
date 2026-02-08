@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>For Vesta ❤️</title>
@@ -11,16 +11,13 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#000;
+background:#040004;
 font-family:Arial;
 color:white;
 overflow:hidden;
 }
 
-#card{
-text-align:center;
-padding:20px;
-}
+#card{text-align:center;padding:20px;transition:.6s}
 
 button{
 padding:14px 35px;
@@ -31,28 +28,20 @@ margin:10px;
 cursor:pointer;
 }
 
-#yes{
-background:#ff4d6d;
-color:white;
-}
-
-#no{
-background:#444;
-color:white;
-position:absolute;
-}
+.pink{background:#ff4d6d;color:white}
+.dark{background:#444;color:white;position:absolute}
 
 img.photo{
-width:90%;
-max-width:350px;
+width:92%;
+max-width:360px;
 border-radius:20px;
-margin:10px 0;
+margin:12px 0;
 }
 
-.heart{
+.float{
 position:absolute;
-bottom:-20px;
-animation:rise 6s linear infinite;
+bottom:-30px;
+animation:rise 8s linear infinite;
 font-size:22px;
 }
 
@@ -68,64 +57,141 @@ to{transform:translateY(-110vh);opacity:0}
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f3a9d2a9a.mp3">
 </audio>
 
-<div id="card">
-
-<h2>Do you love me? ❤️</h2>
-<h2>Will you be my Valentine? 💘</h2>
-
-<button id="yes">YES</button>
-<button id="no">NO</button>
-
-</div>
+<div id="card"></div>
 
 <script>
 
-const no=document.getElementById("no");
+const card=document.getElementById("card");
 
+function floatThings(){
+let h=document.createElement("div");
+h.className="float";
+h.innerHTML=Math.random()>.5?"💖":"🌷";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),8000);
+}
+setInterval(floatThings,500);
+
+function screen(html){
+card.style.opacity=0;
+setTimeout(()=>{
+card.innerHTML=html;
+card.style.opacity=1;
+},400);
+}
+
+/* SCREENS */
+
+screen(`
+<h2>Привет, Vesta… ❤️</h2>
+<p>Это маленькое путешествие…</p>
+<button class="pink" onclick="s2()">Начать</button>
+`);
+
+function s2(){
+screen(`
+<p>Я долго думал, как сказать тебе это…</p>
+<button class="pink" onclick="s3()">Дальше</button>
+`);
+}
+
+function s3(){
+screen(`
+<p>Иногда сердце говорит тише слов…</p>
+<button class="pink" onclick="s4()">Слушать</button>
+`);
+}
+
+function s4(){
+screen(`
+<p>Ты появилась в моей жизни очень тихо…</p>
+<button class="pink" onclick="s5()">И?</button>
+`);
+}
+
+function s5(){
+screen(`
+<p>…но осталась в ней очень глубоко.</p>
+<button class="pink" onclick="s6()">Продолжай</button>
+`);
+}
+
+function s6(){
+screen(`
+<h2>Ты меня любишь? 🥺</h2>
+<button class="pink" onclick="s7()">ДА</button>
+<button id="no" class="dark">НЕТ</button>
+`);
+
+const no=document.getElementById("no");
 no.onmouseover=()=>{
 no.style.left=Math.random()*80+"vw";
 no.style.top=Math.random()*80+"vh";
 };
-
-function hearts(){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
 }
-setInterval(hearts,400);
 
-document.getElementById("yes").onclick=()=>{
+function s7(){
+screen(`
+<h2>Ты уверена?</h2>
+<button class="pink" onclick="s8()">Да ❤️</button>
+<button class="pink" onclick="s8()">Да 😈</button>
+`);
+}
 
+function s8(){
+screen(`
+<h2>Станешь моей Валентинкой? 💘</h2>
+<button class="pink" onclick="s9()">Конечно</button>
+`);
+}
+
+function s9(){
 document.getElementById("music").play();
+screen(`
+<p>Тогда позволь мне подарить тебе кое-что особенное…</p>
+<p>(🌷 нечётное количество — только для живых чувств)</p>
+<button class="pink" onclick="final()">Открыть</button>
+`);
+}
 
-document.getElementById("card").innerHTML=`
+/* FINAL */
 
-<img src="https://i.imgur.com/3pN1QkE.png" width="120"><br>
+function final(){
+screen(`
+
+<h2>🌷🌷🌷🌷🌷</h2>
 
 <img class="photo" src="https://i.ibb.co/nNQgNp5v/photo-48-2025-08-03-20-12-00.jpg">
-
 <img class="photo" src="https://i.ibb.co/SDBP39Td/photo-1-2025-08-03-20-11-00.jpg">
-
-<br>
 
 <img src="https://media.tenor.com/2roX3uxz_68AAAAC/cat-love.gif" width="220">
 
-<h2>I love you too, Vesta ❤️</h2>
+<h2>Я люблю тебя, Vesta ❤️</h2>
 
-<p>
-Ты моё сердце.<br>
-Ты мой дом.
+<p style="line-height:1.6">
+
+Ты мой покой и мой шторм.<br>
+Ты мой дом и моя дорога.<br>
+С тобой даже тишина становится тёплой.
 
 <br><br>
 
-You are my peace and my chaos.<br>
-Harsh loves you forever.
+Ты — моя любимая мысль перед сном.<br>
+Моё спокойствие среди хаоса.<br>
+Моё завтра.
+
+<br><br>
+
+Every heartbeat chooses you.<br>
+Every tomorrow wants you.<br>
+Harsh loves you endlessly.
+
 </p>
-`;
-};
+
+<h3>🌷🌷🌷🌷🌷</h3>
+`);
+}
 
 </script>
 
