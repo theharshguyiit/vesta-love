@@ -7,193 +7,197 @@
 <style>
 body{
 margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#040004;
-font-family:Arial;
-color:white;
+font-family:Segoe UI;
+background:linear-gradient(#ffd6e8,#fff0f5);
 overflow:hidden;
 }
 
-#card{text-align:center;padding:20px;transition:.6s}
+.page{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:85%;
+max-width:500px;
+background:white;
+border-radius:25px;
+padding:30px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,.15);
+}
+
+.page.active{display:block;}
+
+h1{color:#ff4d88;}
+
+.icons{font-size:32px;margin:15px;}
 
 button{
-padding:14px 35px;
-font-size:20px;
+background:#ff4d88;
 border:none;
-border-radius:40px;
-margin:10px;
-cursor:pointer;
-}
-
-.pink{background:#ff4d6d;color:white}
-.dark{background:#444;color:white;position:absolute}
-
-img.photo{
-width:92%;
-max-width:360px;
+padding:10px 20px;
 border-radius:20px;
-margin:12px 0;
+color:white;
+cursor:pointer;
+margin:10px;
 }
 
-.float{
+#typing{color:#444;min-height:130px;}
+
+.tulip{
 position:absolute;
-bottom:-30px;
-animation:rise 8s linear infinite;
-font-size:22px;
+animation:fall 10s linear infinite;
+font-size:28px;
 }
 
-@keyframes rise{
-to{transform:translateY(-110vh);opacity:0}
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
+
+#final{
+position:fixed;
+inset:0;
+background:#ff4d88;
+color:white;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:40px;
+text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f3a9d2a9a.mp3">
-</audio>
+<div id="page1" class="page active">
 
-<div id="card"></div>
+<h1>Happy Valentine’s Day Vesta 💖</h1>
+
+<div class="icons">🧸 🍫 🌷 🌷 🌷</div>
+
+<div id="typing"></div>
+
+<button onclick="surprise()">💌 Surprise</button>
+<button onclick="next()">Next ➜</button>
+<br>
+<button onclick="russian()">Русская версия</button>
+
+</div>
+
+<div id="page2" class="page">
+
+<h1>Our Journey ❤️</h1>
+
+<p>Almost one year since we met.</p>
+
+<p>
+This year gave us distance, patience, tears, hope —  
+but also love deeper than ever.
+</p>
+
+<p>
+We didn’t give up.  
+We chose each other.
+</p>
+
+<p>
+You are my peace.  
+My strength.  
+My home.
+</p>
+
+<p>
+Forever yours,<br><b>Harsh 💞</b>
+</p>
+
+<button onclick="final()">Finish 💗</button>
+
+</div>
+
+<div id="final">
+I LOVE YOU VESTA ❤️  
+<br><br>
+🌷 Forever & Always 🌷
+</div>
 
 <script>
 
-const card=document.getElementById("card");
+let en=`My love Vesta,
 
-function floatThings(){
-let h=document.createElement("div");
-h.className="float";
-h.innerHTML=Math.random()>.5?"💖":"🌷";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),8000);
+Today is Valentine’s Day…  
+and almost one year since we first met.
+
+This year with you changed me.
+
+We struggled.  
+We waited.  
+We stayed.
+
+You made me stronger.
+
+I want every future with you.
+
+Happy Valentine’s Day, my tulip 🌷`;
+
+let ru=`Моя любовь Веста,
+
+Сегодня День Валентина…  
+и почти год с нашей встречи.
+
+Этот год с тобой значит всё.
+
+Мы прошли трудности.  
+Мы остались вместе.
+
+Ты моё спокойствие.
+
+Я хочу каждое будущее с тобой.
+
+С Днём Валентина 🌷`;
+
+let txt=en,i=0;
+
+function type(){
+if(i<txt.length){
+typing.innerHTML+=txt.charAt(i++);
+setTimeout(type,40);
 }
-setInterval(floatThings,500);
-
-function screen(html){
-card.style.opacity=0;
-setTimeout(()=>{
-card.innerHTML=html;
-card.style.opacity=1;
-},400);
 }
+type();
 
-/* SCREENS */
-
-screen(`
-<h2>Привет, Vesta… ❤️</h2>
-<p>Это маленькое путешествие…</p>
-<button class="pink" onclick="s2()">Начать</button>
-`);
-
-function s2(){
-screen(`
-<p>Я долго думал, как сказать тебе это…</p>
-<button class="pink" onclick="s3()">Дальше</button>
-`);
-}
-
-function s3(){
-screen(`
-<p>Иногда сердце говорит тише слов…</p>
-<button class="pink" onclick="s4()">Слушать</button>
-`);
-}
-
-function s4(){
-screen(`
-<p>Ты появилась в моей жизни очень тихо…</p>
-<button class="pink" onclick="s5()">И?</button>
-`);
+function russian(){
+txt=ru;i=0;typing.innerHTML="";type();
 }
 
-function s5(){
-screen(`
-<p>…но осталась в ней очень глубоко.</p>
-<button class="pink" onclick="s6()">Продолжай</button>
-`);
+function surprise(){
+alert("I love you endlessly ❤️ — Harsh");
 }
 
-function s6(){
-screen(`
-<h2>Ты меня любишь? 🥺</h2>
-<button class="pink" onclick="s7()">ДА</button>
-<button id="no" class="dark">НЕТ</button>
-`);
-
-const no=document.getElementById("no");
-no.onmouseover=()=>{
-no.style.left=Math.random()*80+"vw";
-no.style.top=Math.random()*80+"vh";
-};
+function next(){
+page1.classList.remove("active");
+page2.classList.add("active");
 }
-
-function s7(){
-screen(`
-<h2>Ты уверена?</h2>
-<button class="pink" onclick="s8()">Да ❤️</button>
-<button class="pink" onclick="s8()">Да 😈</button>
-`);
-}
-
-function s8(){
-screen(`
-<h2>Станешь моей Валентинкой? 💘</h2>
-<button class="pink" onclick="s9()">Конечно</button>
-`);
-}
-
-function s9(){
-document.getElementById("music").play();
-screen(`
-<p>Тогда позволь мне подарить тебе кое-что особенное…</p>
-<p>(🌷 нечётное количество — только для живых чувств)</p>
-<button class="pink" onclick="final()">Открыть</button>
-`);
-}
-
-/* FINAL */
 
 function final(){
-screen(`
+page2.style.display="none";
+document.getElementById("final").style.display="flex";
+}
 
-<h2>🌷🌷🌷🌷🌷</h2>
-
-<img class="photo" src="https://i.ibb.co/nNQgNp5v/photo-48-2025-08-03-20-12-00.jpg">
-<img class="photo" src="https://i.ibb.co/SDBP39Td/photo-1-2025-08-03-20-11-00.jpg">
-
-<img src="https://media.tenor.com/2roX3uxz_68AAAAC/cat-love.gif" width="220">
-
-<h2>Я люблю тебя, Vesta ❤️</h2>
-
-<p style="line-height:1.6">
-
-Ты мой покой и мой шторм.<br>
-Ты мой дом и моя дорога.<br>
-С тобой даже тишина становится тёплой.
-
-<br><br>
-
-Ты — моя любимая мысль перед сном.<br>
-Моё спокойствие среди хаоса.<br>
-Моё завтра.
-
-<br><br>
-
-Every heartbeat chooses you.<br>
-Every tomorrow wants you.<br>
-Harsh loves you endlessly.
-
-</p>
-
-<h3>🌷🌷🌷🌷🌷</h3>
-`);
+for(let i=0;i<35;i++){
+let t=document.createElement("div");
+t.className="tulip";
+t.innerHTML="🌷";
+t.style.left=Math.random()*100+"vw";
+t.style.animationDelay=Math.random()*10+"s";
+document.body.appendChild(t);
 }
 
 </script>
 
 </body>
 </html>
+
